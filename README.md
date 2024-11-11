@@ -5,7 +5,7 @@ Instrucciones:
 
 Dependencias
 
-<img src="https://github.com/user-attachments/assets/f3e59b2e-4dea-4311-95e5-dda9138ff6e0" width="250" />
+<img src="https://github.com/user-attachments/assets/f3e59b2e-4dea-4311-95e5-dda9138ff6e0" width="450" />
 
 
 Screens
