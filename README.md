@@ -4,9 +4,9 @@ Instrucciones:
 ![image](https://github.com/user-attachments/assets/a1f93de4-7e53-48dd-b99e-2bd7d56cbee2)
 
 Dependencias
-![image](https://github.com/user-attachments/assets/f3e59b2e-4dea-4311-95e5-dda9138ff6e0)
+<img src="https://github.com/user-attachments/assets/f3e59b2e-4dea-4311-95e5-dda9138ff6e0" width="150" />
 
-Screens
+
 Screens
 
 <img src="https://github.com/user-attachments/assets/a57c17ec-f42f-4c8c-a161-1f3c83444d8d" width="150" />
