@@ -174,8 +174,8 @@ class ClientCreateContent extends StatelessWidget {
       onTap: (){
         SelectOptionImageDialog(
           context,
-          (){bloc?.add(PickImage());}, 
-          (){bloc?.add(TakePhoto());}, 
+          (){bloc?.add(ClientCreatePickImage());}, 
+          (){bloc?.add(ClientCreateTakePhoto());}, 
         );
       },
       child: Container(

@@ -19,7 +19,7 @@ class DefaultTextfield extends StatefulWidget {
     this.obscureText = false,
     this.validator,
     this.initialValue,
-    this.color = Colors.grey,
+    this.color = const Color.fromARGB(255, 124, 123, 123),
     this.textInputType = TextInputType.text,
     this.showEyeIcon = false, // Valor predeterminado es false
   }) : super(key: key);

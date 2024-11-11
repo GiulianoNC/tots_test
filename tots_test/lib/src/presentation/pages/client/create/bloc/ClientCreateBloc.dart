@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:tots_test/src/domain/models/Client.dart';
 import 'package:tots_test/src/domain/usersCases/client/ClientUseCases.dart';
 import 'package:tots_test/src/domain/utils/Resource.dart';
 import 'package:tots_test/src/presentation/pages/client/create/bloc/ClientCreateEvent.dart';
@@ -18,6 +20,8 @@ class ClientCreateBloc extends Bloc<ClientCreateEvent, ClientCreateState> {
     on<FirstNameChanged>(_onFirstNameChanged);
     on<LastNameChanged>(_onLastNameChanged);
     on<EmailChanged>(_onEmailChanged);
+    on<ClientCreatePickImage>(_onPickImage);
+    on<ClientCreateTakePhoto>(_onTakePhoto);
     on<CreateFormSubmit>(_onCreateFormSubmit);
      on<ClientFormReset>(_onFormCreateReset);
   }
@@ -31,7 +35,7 @@ class ClientCreateBloc extends Bloc<ClientCreateEvent, ClientCreateState> {
       state.copyWith(
         firstname: BlocFormItem(
           value: event.firstname.value,
-          error: event.firstname.value.isNotEmpty ? null : "Ingesa el nombre"
+          error: event.firstname.value.isNotEmpty ? null : "Ingresa el nombre"
           ),
           
         formKey: formKey
@@ -43,7 +47,7 @@ class ClientCreateBloc extends Bloc<ClientCreateEvent, ClientCreateState> {
       state.copyWith(
         lastname: BlocFormItem(
           value: event.lastname.value,
-          error: event.lastname.value.isNotEmpty  ? null : "Ingesa el apellido"
+          error: event.lastname.value.isNotEmpty  ? null : "Ingresa el apellido"
           ),
           
         formKey: formKey
@@ -55,12 +59,14 @@ class ClientCreateBloc extends Bloc<ClientCreateEvent, ClientCreateState> {
       state.copyWith(
         email: BlocFormItem(
           value: event.email.value,
-          error: event.email.value.isNotEmpty && event.email.value.length >= 6  ? null : "Ingesa el email"
+          error: event.email.value.isNotEmpty && event.email.value.length >= 6  ? null : "Ingresa el email"
           ),
           
         formKey: formKey
     ));
   }
+
+ 
 
   Future<void> _onCreateFormSubmit (CreateFormSubmit event, Emitter<ClientCreateState> emit) async{
     emit(
@@ -69,14 +75,47 @@ class ClientCreateBloc extends Bloc<ClientCreateEvent, ClientCreateState> {
         formKey: formKey
       )
     );
-    Resource response = await clientUsesCases.create.run(state.toClient());
+    Client createClient = state.toClient().copyWith(
+      photo: state.imagePath, 
+    );
+    Resource response = await clientUsesCases.create.run(createClient);
     emit(
       state.copyWith(
         response: response,
         formKey: formKey
         ),
       );
+
+      
   }  
+
+   Future<void> _onPickImage(ClientCreatePickImage event, Emitter<ClientCreateState> emit) async {
+  final ImagePicker picker = ImagePicker();
+  final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+  if (image != null) {
+    emit(
+      state.copyWith(
+        file: File(image.path),
+        imagePath: image.path, 
+        formKey: formKey,
+      ),
+    );
+  }
+}
+
+Future<void> _onTakePhoto(ClientCreateTakePhoto event, Emitter<ClientCreateState> emit) async {
+  final ImagePicker picker = ImagePicker();
+  final XFile? image = await picker.pickImage(source: ImageSource.camera);
+  if (image != null) {
+    emit(
+      state.copyWith(
+        file: File(image.path),
+        imagePath: image.path, 
+        formKey: formKey,
+      ),
+    );
+  }
+}
 
 
   Future<void>? _onFormCreateReset(ClientFormReset event, Emitter<ClientCreateState> emit) {

@@ -32,6 +32,14 @@ class EmailChanged extends ClientCreateEvent {
   List<Object?> get props => [email];
 }
 
+class ClientCreatePickImage extends ClientCreateEvent {
+  const ClientCreatePickImage();
+}
+
+class ClientCreateTakePhoto extends ClientCreateEvent {
+  const ClientCreateTakePhoto();
+}
+
 class CreateFormSubmit extends ClientCreateEvent {
   const CreateFormSubmit();
 }

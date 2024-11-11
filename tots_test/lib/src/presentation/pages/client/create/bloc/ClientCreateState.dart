@@ -13,6 +13,7 @@ class ClientCreateState extends Equatable {
   final BlocFormItem address;
   final BlocFormItem photo;
   final BlocFormItem caption;
+  final String? imagePath;
   final GlobalKey<FormState> formKey; // Non-constant
   final Resource? response;
   final File? file;
@@ -24,6 +25,7 @@ class ClientCreateState extends Equatable {
     this.photo = const BlocFormItem(error: 'Ingresa la foto'),
     this.address = const BlocFormItem(error: 'Ingresa la dirección'),
     this.caption = const BlocFormItem(),
+    this.imagePath,
     GlobalKey<FormState>? formKey, // Nullable parameter without default const value
     this.file,
     this.response,
@@ -33,6 +35,7 @@ class ClientCreateState extends Equatable {
     firstname: firstname.value,
     lastname: lastname.value,
     email: email.value,
+    photo: imagePath
   );
 
   ClientCreateState ClientResetForm() {
@@ -43,7 +46,16 @@ class ClientCreateState extends Equatable {
       address: const BlocFormItem(error: 'Ingresa la dirección'),
       photo: const BlocFormItem(error: 'Ingresa la captura'),
       caption: const BlocFormItem(error: 'Ingresa la captura'),
+      imagePath: null
     );
+  }
+
+  ClientCreateState resetForm(){
+    return ClientCreateState(
+      file:null,
+      imagePath: null
+    );
+
   }
 
   ClientCreateState copyWith({
@@ -56,6 +68,7 @@ class ClientCreateState extends Equatable {
     GlobalKey<FormState>? formKey,
     Resource? response,
     File? file,
+    String? imagePath,
   }) {
     return ClientCreateState(
       firstname: firstname ?? this.firstname,
@@ -64,6 +77,7 @@ class ClientCreateState extends Equatable {
       address: address ?? this.address,
       caption: caption ?? this.caption,
       photo: photo ?? this.photo,
+      imagePath: imagePath ?? this.imagePath,
       formKey: formKey ?? this.formKey,
       response: response ?? this.response,
       file: file ?? this.file,
@@ -71,5 +85,5 @@ class ClientCreateState extends Equatable {
   }
 
   @override
-  List<Object?> get props => [firstname, lastname, email,photo, address, caption, file, response];
+  List<Object?> get props => [firstname, lastname, email,photo,imagePath, address, caption, file, response];
 }
