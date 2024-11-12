@@ -12,13 +12,14 @@ class Registercontent extends StatelessWidget {
   
   RegisterBloc? bloc;
   RegisterState state;
+  final GlobalKey<FormState> formKey;
 
-  Registercontent(this.bloc, this.state);
+  Registercontent(this.bloc, this.state,this.formKey);
 
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: state.formKey,
+      key:  formKey,
       child: Stack(
         alignment: Alignment.center,
         children: [
@@ -29,7 +30,7 @@ class Registercontent extends StatelessWidget {
           Container(
             height: MediaQuery.of(context).size.height* 0.75,
             width: MediaQuery.of(context).size.width * 0.85,  
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Color.fromRGBO(255, 255, 255, 0.3),
               borderRadius: BorderRadius.all(Radius.circular(25))
             ),
@@ -63,7 +64,7 @@ class Registercontent extends StatelessWidget {
   }
   
   Widget _iconPerson(){
-    return Icon(
+    return const Icon(
       Icons.person,
       color: Colors.grey,
       size: 125,  
@@ -71,7 +72,7 @@ class Registercontent extends StatelessWidget {
   }
 
   Widget _textRegister(){
-    return Text(
+    return const Text(
       'Register',
       style: TextStyle(
         fontSize: 20,
@@ -86,6 +87,7 @@ class Registercontent extends StatelessWidget {
       margin: EdgeInsets.only(left: 25, right: 25),
       child: DefaultTextfield(
         label: 'First name',
+        errorText: state.showErrors ? state.firstName.error : null,
         onChanged: (text){
           bloc?.add(RegisterFirstNameChanged(firstName: BlocFormItem(value: text)));
         }),
@@ -98,6 +100,7 @@ class Registercontent extends StatelessWidget {
       margin: EdgeInsets.only(left: 25, right: 25),
       child: DefaultTextfield(
         label: 'Email',
+        errorText: state.showErrors ? state.email.error : null,
         onChanged: (text){
           bloc?.add(RegisterEmailChanged(email: BlocFormItem(value: text)));
         }),
@@ -111,6 +114,7 @@ class Registercontent extends StatelessWidget {
       child: DefaultTextfield(
         obscureText: false,
         label: 'Password',
+        errorText: state.showErrors ? state.password.error : null,
         onChanged: (text){
           bloc?.add(RegisterPasswordChanged(password: BlocFormItem(value: text)));
         }),
@@ -123,30 +127,32 @@ class Registercontent extends StatelessWidget {
       child: DefaultTextfield(
         obscureText: false,
         label: 'Confirm password',
+        errorText: state.showErrors ? state.confirmPassword.error : null,
         onChanged: (text){
           bloc?.add(RegisterConfirmPasswordChanged(confirmPassword: BlocFormItem(value: text)));
         }),
     );
   }
 
-  Widget _buttonRegister(BuildContext context){
-    return Container(
-      margin: EdgeInsets.only(left: 25, right: 25,top: 25),
-      child: Defaultbutton(
-        text: 'REGISTER',
-        color: Colors.black,
-        onPressed: (){
-          if(state.formKey!.currentState!.validate()){
-            bloc?.add(RegisterFormSubmit());
-          }else{
-            Fluttertoast.showToast(
-              msg: 'El formulario no es válido',
-              toastLength: Toast.LENGTH_LONG
-            );
-            
-          }
-        }),
-    );
-  }
+  Widget _buttonRegister(BuildContext context) {
+  return Container(
+    margin: EdgeInsets.only(left: 25, right: 25, top: 25),
+    child: Defaultbutton(
+      text: 'REGISTER',
+      color: Colors.black,
+      onPressed: () {
+        if (formKey.currentState!.validate()) {
+          bloc?.add(RegisterFormSubmit());
+        } else {
+          Fluttertoast.showToast(
+            msg: 'The form is invalid',
+            toastLength: Toast.LENGTH_LONG,
+          );
+        }
+      },
+    ),
+  );
+}
+
 
 }

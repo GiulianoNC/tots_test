@@ -35,7 +35,7 @@ class _LoginpageState extends State<Loginpage> {
             if (responseState is Error) {
               final errorMessage = responseState.message ?? 'Error desconocido';
               Fluttertoast.showToast(
-                  msg: errorMessage,
+                  msg: 'Error: $errorMessage',
                   toastLength: Toast.LENGTH_LONG,
               );
             }
@@ -44,7 +44,7 @@ class _LoginpageState extends State<Loginpage> {
               //_bloc?.add(LoginSaveUserSession(authResponse: authResponse));//guardar el usuario en caso de que la respuesta sea exitosa
               
               Fluttertoast.showToast(
-                  msg: 'Exito',
+                  msg: 'successful',
                   toastLength: Toast.LENGTH_LONG,
               );
               Navigator.pushReplacementNamed(context, 'clienpage');

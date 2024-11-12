@@ -4,7 +4,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:tots_test/src/domain/utils/Resource.dart';
 import 'package:tots_test/src/presentation/pages/register/RegisterContent.dart';
 import 'package:tots_test/src/presentation/pages/register/bloc/RegisterBloc.dart';
-import 'package:tots_test/src/presentation/pages/register/bloc/RegisterEvent.dart';
 import 'package:tots_test/src/presentation/pages/register/bloc/RegisterState.dart';
 import 'package:tots_test/src/presentation/widgets/Image_background.dart';
 
@@ -17,11 +16,8 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   RegisterBloc? _bloc;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>(); 
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,21 +36,20 @@ class _RegisterPageState extends State<RegisterPage> {
                   toastLength: Toast.LENGTH_LONG,
                 );
               } else if (responseState is Success) {
-                _bloc?.add(RegisterFormReset());
                 Fluttertoast.showToast(
-                  msg: 'Registro exitoso',
+                  msg: 'Successful registration',
                   toastLength: Toast.LENGTH_LONG,
-                );
+                );            
               }
             },
             child: BlocBuilder<RegisterBloc, RegisterState>(
               builder: (context, state) {
                 if (state is Loading) {
-                  return Center(
+                  return const Center(
                     child: CircularProgressIndicator(),
                   );
                 } else {
-                  return Registercontent(_bloc, state);
+                  return Registercontent(_bloc, state,_formKey);
                 }
               },
             ),

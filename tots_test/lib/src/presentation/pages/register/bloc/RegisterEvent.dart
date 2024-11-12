@@ -1,4 +1,3 @@
-
 import 'package:equatable/equatable.dart';
 import 'package:tots_test/src/presentation/utils/BlocForItem.dart';
 

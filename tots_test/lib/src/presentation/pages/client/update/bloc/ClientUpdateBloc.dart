@@ -33,12 +33,14 @@ class ClientUpdateBloc extends Bloc<ClientUpdateEvent, ClientUpdateState>{
   }
 
   Future<void>?_onClientUpdateInitEvent(ClientUpdateInitEvent event, Emitter<ClientUpdateState>emit){
+    emit(state.resetForm());
     emit(
       state.copyWith(
         id:event.client?.id,
         firstname:BlocFormItem(value: event.client?.firstname ?? ''),
         lastname:BlocFormItem(value: event.client?.lastname ?? ''),
         email:BlocFormItem(value: event.client?.email ?? ''),
+        imagePath: event.client?.photo,
         formKey: formKey
       )
     );

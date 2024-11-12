@@ -4,14 +4,14 @@ import 'package:tots_test/src/domain/models/User.dart';
 import 'package:tots_test/src/domain/utils/Resource.dart';
 import 'package:tots_test/src/presentation/utils/BlocForItem.dart';
 
-class RegisterState extends Equatable{
-
+class RegisterState extends Equatable {
   final BlocFormItem firstName;
   final BlocFormItem email;
   final BlocFormItem password;
   final BlocFormItem confirmPassword;
   final GlobalKey<FormState>? formKey;
   final Resource? response;
+  final bool showErrors; 
 
   const RegisterState({
     this.firstName = const BlocFormItem(error: 'ingresa el nombre'),
@@ -19,18 +19,17 @@ class RegisterState extends Equatable{
     this.password = const BlocFormItem(error: 'ingresa el password'),
     this.confirmPassword = const BlocFormItem(error: 'Confirma el password'),
     this.formKey,
-    this.response
-
+    this.response,
+    this.showErrors = false, 
   });
 
   toUser() {
-  return User(
-    firstName: firstName.value,
-    password: password.value,
-    email: email.value,
-  );
-}
-
+    return User(
+      firstName: firstName.value,
+      password: password.value,
+      email: email.value,
+    );
+  }
 
   RegisterState copyWith({
     BlocFormItem? firstName,
@@ -38,21 +37,20 @@ class RegisterState extends Equatable{
     BlocFormItem? password,
     BlocFormItem? confirmPassword,
     GlobalKey<FormState>? formKey,
-    Resource? response
-  }){
-    return  RegisterState(
+    Resource? response,
+    bool? showErrors, 
+  }) {
+    return RegisterState(
       firstName: firstName ?? this.firstName,
       email: email ?? this.email,
       password: password ?? this.password,
       confirmPassword: confirmPassword ?? this.confirmPassword,
-      formKey: formKey,
-      response: response
-
+      formKey: formKey ?? this.formKey,
+      response: response ?? this.response,
+      showErrors: showErrors ?? this.showErrors, 
     );
   }
 
   @override
-  List<Object?> get props => [firstName, email, password,confirmPassword,response];
-
-
+  List<Object?> get props => [firstName, email, password, confirmPassword, response, showErrors];
 }
