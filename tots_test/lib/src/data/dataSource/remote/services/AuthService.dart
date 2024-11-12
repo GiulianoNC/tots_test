@@ -2,11 +2,13 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:tots_test/src/data/api/ApiConfig.dart';
+import 'package:tots_test/src/data/dataSource/local/SharedPref.dart';
 import 'package:tots_test/src/domain/models/AuthResponse.dart';
 import 'package:tots_test/src/domain/utils/ListToString.dart';
 import 'package:tots_test/src/domain/utils/Resource.dart';
 
 class Authservice {
+  final SharedPref _sharedPref = SharedPref();
   //METODO LOGIN
   Future<Resource<AuthResponse>> login (String email, String password)async{
     try {
@@ -21,6 +23,8 @@ class Authservice {
 
       if(response.statusCode == 200 || response.statusCode == 201){//EXITOSA
         AuthResponse authResponse = AuthResponse.fromJson(data);
+        await _sharedPref.save('access_token', authResponse.accessToken);//guardar token
+        
         return Success(authResponse);
       }else{
         return Error(listToString(data['message']));//ERROR

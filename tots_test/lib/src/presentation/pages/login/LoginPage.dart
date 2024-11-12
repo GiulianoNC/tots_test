@@ -40,8 +40,9 @@ class _LoginpageState extends State<Loginpage> {
               );
             }
             else if(responseState is Success){
-              final authResponse = responseState.data as AuthResponse;
-              _bloc?.add(LoginSaveUserSession(authResponse: authResponse));//guardar el usuario en caso de que la respuesta sea exitosa
+              //final authResponse = responseState.data as AuthResponse;
+              //_bloc?.add(LoginSaveUserSession(authResponse: authResponse));//guardar el usuario en caso de que la respuesta sea exitosa
+              
               Fluttertoast.showToast(
                   msg: 'Exito',
                   toastLength: Toast.LENGTH_LONG,

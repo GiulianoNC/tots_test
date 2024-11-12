@@ -19,7 +19,7 @@ class SharedPref {
     final prefs = await SharedPreferences.getInstance();
     return prefs.remove(key);
   }
-
+  
   Future<bool>contains(String key) async{
     final prefs= await SharedPreferences.getInstance();
     return prefs.containsKey(key);

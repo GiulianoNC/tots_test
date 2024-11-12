@@ -35,12 +35,15 @@ class Authrepositoryimpl implements AuthRepository {
   @override
   Future<void> saveUserSession(AuthResponse authResponse)async {
     sharedPref.save('user',  authResponse.toJson());
+    
   }
   
   @override
   Future<bool?> logout()async {
-    return await sharedPref.remove('user');
+    await sharedPref.remove('user');  
   }
+
+
 
 
 }

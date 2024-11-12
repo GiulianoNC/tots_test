@@ -28,14 +28,14 @@ abstract class Appmodule {
   SharedPref get sharedPred => SharedPref();
 
   @injectable
-  Future<String> get token async{
-    String token ='';
+  Future<String> get token async {
+    String token = '';
     final userSession = await sharedPred.read('user');
-    if(userSession != null){
-        AuthResponse authResponse = AuthResponse.fromJson(userSession);
-        token = authResponse.accessToken;
+    if (userSession != null) {
+      AuthResponse authResponse = AuthResponse.fromJson(userSession);
+      token = authResponse.accessToken;
     }
-    return token;  
+    return token;
   }
 
   @injectable
@@ -53,9 +53,19 @@ abstract class Appmodule {
       logout: LogoutUseCase(authRepository)
     );
   
-  
   @injectable
-  ClientService get clientService => ClientService(token);
+  ClientService get clientService => ClientService(getToken());
+
+  Future<String> getToken() async {
+    String token = '';
+    final userSession = await sharedPred.read('user');
+    if (userSession != null) {
+      AuthResponse authResponse = AuthResponse.fromJson(userSession);
+      token = authResponse.accessToken;
+    }
+    return token;
+  }
+  
 
   @injectable
   ClientRepository get clientRepository => ClientRepositoryImpl(clientService); 

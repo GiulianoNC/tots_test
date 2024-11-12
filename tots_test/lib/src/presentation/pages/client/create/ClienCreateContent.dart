@@ -75,11 +75,11 @@ class ClientCreateContent extends StatelessWidget {
               Navigator.pushReplacementNamed(context, 'clienpage');
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color.fromARGB(255, 184, 181, 181)
+              backgroundColor: const Color.fromARGB(255, 255, 254, 254)
             ),
             child: const Text(
               'CANCEL',
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: Colors.grey),
             ),
           ),
       ),

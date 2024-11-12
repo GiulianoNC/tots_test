@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tots_test/src/data/dataSource/local/SharedPref.dart';
 import 'package:tots_test/src/domain/models/Client.dart';
 import 'package:tots_test/src/domain/utils/Resource.dart';
 import 'package:tots_test/src/presentation/pages/client/List/ClientListItem.dart';
@@ -9,7 +10,6 @@ import 'package:tots_test/src/presentation/pages/client/List/bloc/ClientBloc.dar
 import 'package:tots_test/src/presentation/pages/client/List/bloc/ClientEvent.dart';
 import 'package:tots_test/src/presentation/pages/client/List/bloc/ClientState.dart';
 import 'package:tots_test/src/presentation/pages/client/create/ClientCreatePage.dart';
-import 'package:tots_test/src/presentation/pages/client/update/bloc/ClientUpdateBloc.dart';
 import 'package:tots_test/src/presentation/widgets/Image_background.dart';
 
 class ClientPage extends StatefulWidget {
@@ -23,7 +23,7 @@ class _ClientState extends State<ClientPage> {
   late ClientBloc _bloc;
   int currentPage = 1;
   int clientsToShow = 5;// Inicialmente mostrar 5 clientes
-  List<Client> clients = [];
+  List<dynamic> clients = [];
   String searchQuery = '';
   final TextEditingController _searchController = TextEditingController();
 
@@ -104,7 +104,7 @@ class _ClientState extends State<ClientPage> {
               if (responseState is Loading && clients.isEmpty) {
                 return const Center(child: CircularProgressIndicator());
               } else if (responseState is Success) {
-                clients = responseState.data as List<Client>;
+                clients = responseState.data ;
               }
               final clientsToDisplay = clients.take(clientsToShow).toList();
               return Column(
@@ -233,8 +233,22 @@ class _ClientState extends State<ClientPage> {
     );
   }
 
+  void _handleLogout() async {
+    final sharedPref = SharedPref();
+    await sharedPref.remove('user');
+    await sharedPref.remove('token'); // Eliminar token
 
-    void _showLogoutConfirmationDialog(BuildContext context) { 
+    // Lanza el evento de Logout en el bloc para manejar la lógica de cierre de sesión en el backend
+    _bloc.add(Logout());
+
+    // Navega a la página de login después de cerrar la sesión
+    Navigator.of(context).pushReplacementNamed('login');
+}
+
+
+
+
+  void _showLogoutConfirmationDialog(BuildContext context) { 
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -244,21 +258,21 @@ class _ClientState extends State<ClientPage> {
           actions: <Widget>[
             TextButton(
               onPressed: () {
-                _bloc?.add(Logout());                 
+                _handleLogout(); // Solo llamamos a este método
               },
-              child: Text('Cancel'),
+              child: Text('Logout', style: TextStyle(color: Colors.red)),
             ),
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
-                Navigator.of(context).pushReplacementNamed('login');
               },
-              child: Text('Logout', style: TextStyle(color: Colors.red)),
+              child: Text('Cancel'),
             ),
           ],
         );
       },
     );
   }
+
 
 }

@@ -49,8 +49,6 @@ class Logincontent extends StatelessWidget {
     );
   }
 
- 
-
   Widget _image1(){
     return Image.asset(
     'assets/img/image.png', 
@@ -61,7 +59,7 @@ class Logincontent extends StatelessWidget {
   }
 
   Widget _textLogin(){
-    return Text(
+    return const Text(
       'LOG IN',
         style: TextStyle(
         fontSize: 12,
@@ -106,7 +104,7 @@ class Logincontent extends StatelessWidget {
   Widget _buttonLogin(BuildContext context){
     return Container(
         height: 55,
-        width: MediaQuery.of(context).size.width,//ocupada todo el espacio horizontal
+        width: MediaQuery.of(context).size.width,
         margin: EdgeInsets.only(left: 25, right: 25, top: 25, bottom: 15),
         child: ElevatedButton(
           onPressed:(){
@@ -120,9 +118,9 @@ class Logincontent extends StatelessWidget {
             }    
           },
             style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.black //snapshot.hasData ?  Colors.green : Colors.grey //condicion de si se cumple las condificiones del snapshata se vera verde sino gris
+                backgroundColor: Colors.black 
             ),
-            child: Text(
+            child: const Text(
               'LOG IN',
               style: TextStyle(
               color: Colors.white
@@ -134,7 +132,7 @@ class Logincontent extends StatelessWidget {
 
   Widget _textDontHaveAccount(){
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,//HORIZONTAL
+      mainAxisAlignment: MainAxisAlignment.center,
         children: [
         Container(
           width: 65,
