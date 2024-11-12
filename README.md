@@ -1,6 +1,7 @@
 Test tots
 
 Instrucciones:
+
 ![image](https://github.com/user-attachments/assets/a1f93de4-7e53-48dd-b99e-2bd7d56cbee2)
 
 Dependencias
@@ -17,6 +18,11 @@ Screens
 <img src="https://github.com/user-attachments/assets/6725a4c4-057f-4c14-a601-abdcced8fb80" width="150" />
 <img src="https://github.com/user-attachments/assets/40df5c20-f6e9-4b44-a681-7f134dbd3ec2" width="150" />
 <img src="https://github.com/user-attachments/assets/c094d558-acc0-4cba-af00-e64b1a313178" width="150" />
+
+
+video
+![tots](https://github.com/user-attachments/assets/e97237ca-a99f-45db-b266-a467511e33a5)
+
 
 
 
