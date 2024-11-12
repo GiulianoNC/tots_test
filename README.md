@@ -10,7 +10,7 @@ Dependencias
 
 Video demostrativo
 
-video
+
 ![tots](https://github.com/user-attachments/assets/e97237ca-a99f-45db-b266-a467511e33a5)
 
 
