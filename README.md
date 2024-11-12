@@ -31,10 +31,8 @@ Además, noté que faltaba una opción para cerrar sesión. Implementé un **bot
 
 ### **Video Demostrativo**
 
-![tots](https://github.com/user-attachments/assets/430e2a82-2630-4051-9c31-3e1a84a64648)
+![tots](https://github.com/user-attachments/assets/f79a5520-6b3f-4f66-ab1c-1db66ede8807)
 
-
----
 
 ### **Screenshots**
 
