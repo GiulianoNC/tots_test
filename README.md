@@ -14,7 +14,7 @@ Además de las 4 horas de desarrollo diario, también invertí aproximadamente *
 
 ---
 
-### **Extra: Mejoras en la Funcionalidad**
+### **Mejoras en la Funcionalidad**
 Durante la integración de las APIs, identifiqué la ausencia de una funcionalidad importante: un endpoint para el registro de nuevos usuarios. Decidí agregar un **botón de registro en la interfaz** para mejorar la experiencia de usuario, permitiendo un proceso de registro completo. 
 
 Además, noté que faltaba una opción para cerrar sesión. Implementé un **botón de cierre de sesión**, asegurando una navegación más fluida y completa. Estas mejoras no solo cumplieron con los requerimientos iniciales, sino que optimizaron la interacción del usuario con la aplicación, permitiendo una gestión efectiva de la sesión.
