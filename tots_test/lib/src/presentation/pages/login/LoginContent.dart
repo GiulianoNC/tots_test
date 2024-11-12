@@ -7,7 +7,7 @@ import 'package:tots_test/src/presentation/utils/BlocForItem.dart';
 import 'package:tots_test/src/presentation/widgets/Default_textfield.dart';
 
 //DISEÑO DE LOGIN
-class Logincontent extends StatelessWidget {
+class Logincontent extends StatefulWidget {
 
   LoginBloc? bloc;
   LoginState state;
@@ -17,9 +17,23 @@ class Logincontent extends StatelessWidget {
   );
 
   @override
+  State<Logincontent> createState() => _LogincontentState();
+}
+
+class _LogincontentState extends State<Logincontent> {
+
+  bool _obscurePassword = true;
+
+  void _toggleObscureText() {
+    setState(() {
+      _obscurePassword = !_obscurePassword;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Form(
-      key: state.formKey,
+      key: widget.state.formKey,
       child: Stack(
         alignment: Alignment.center,
         children: [
@@ -75,29 +89,30 @@ class Logincontent extends StatelessWidget {
         child: DefaultTextfield(
           label: 'Email',
           onChanged: (text){
-            bloc?.add(EmailChanged(email: BlocFormItem(value: text)));
+            widget.bloc?.add(EmailChanged(email: BlocFormItem(value: text)));
           },
           validator: (value){
-            return state.email.error;
+            return widget.state.email.error;
           },
         )
     );
   }
 
-  Widget _textFieldPassword(){
+   Widget _textFieldPassword() {
     return Container(
-        margin: EdgeInsets.only(left: 25, right: 25),
-        child: DefaultTextfield(
-          label: 'Password',
-          onChanged: (text){
-            bloc?.add(PasswordChanged(password: BlocFormItem(value: text)));
-          },
-          obscureText: true,
-          validator: (value){
-            return state.password.error;
-          },
-          showEyeIcon: true,
-        ),
+      margin: EdgeInsets.only(left: 25, right: 25),
+      child: DefaultTextfield(
+        label: 'Password',
+        onChanged: (text) {
+          widget.bloc?.add(PasswordChanged(password: BlocFormItem(value: text)));
+        },
+        obscureText: _obscurePassword,
+        onToggleObscure: _toggleObscureText,
+        validator: (value) {
+          return widget.state.password.error;
+        },
+        showEyeIcon: true,
+      ),
     );
   }
 
@@ -108,8 +123,8 @@ class Logincontent extends StatelessWidget {
         margin: EdgeInsets.only(left: 25, right: 25, top: 25, bottom: 15),
         child: ElevatedButton(
           onPressed:(){
-            if(state.formKey!.currentState!.validate()){
-              bloc?.add(LoginSubmit());
+            if(widget.state.formKey!.currentState!.validate()){
+              widget.bloc?.add(LoginSubmit());
             }else{
                 Fluttertoast.showToast(
                   msg: 'The form is not valid',
