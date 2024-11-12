@@ -9,7 +9,8 @@ Dependencias
 
 
 Screens
-<img src="https://github.com/user-attachments/assets/e75124b5-eb4d-43a4-be7a-20cbe38edb52" width="150" />
+
+<img src="https://github.com/user-attachments/assets/11fec6f9-b3fc-46ce-bb14-48a315befeef" width="150" />
 <img src="https://github.com/user-attachments/assets/f27c5a6f-bf70-43f5-888b-8bbda7adb1cc" width="150" />
 <img src="https://github.com/user-attachments/assets/714634bb-44c2-4a18-82bf-0c692297f6e7" width="150" />
 <img src="https://github.com/user-attachments/assets/a1ab7858-a9d6-4f96-abe6-9dfae9caf19e" width="150" />
