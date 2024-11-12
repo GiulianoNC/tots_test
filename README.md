@@ -13,6 +13,14 @@ Además de las 4 horas de desarrollo diario, también invertí alrededor de 1 ho
 asegurándome de que todo funcionara correctamente antes de la entrega final. Esto fue un desafío considerando mis otros compromisos,
 pero logré organizarme bien para cumplir con los tiempos establecidos.
 
+Extra: Durante la integración de las APIs, noté que faltaba una funcionalidad importante: un endpoint para el registro de nuevos usuarios.
+Decidí agregar un botón de registro en la interfaz, lo que mejora la experiencia de usuario al permitir un proceso de registro completo.
+También identifiqué la ausencia de una opción para cerrar sesión, por lo que implementé un botón para esta acción, asegurando una navegación más fluida y completa.
+Estas mejoras no solo cumplieron con los requerimientos, sino que también optimizaron la interacción con la aplicación y garantizaron que los usuarios pudieran gestionar su sesión de manera efectiva.
+
+![image](https://github.com/user-attachments/assets/e9645ff3-c086-4250-997c-f2e73bee57e1)
+
+
 Dependencias
 
 <img src="https://github.com/user-attachments/assets/f3e59b2e-4dea-4311-95e5-dda9138ff6e0" width="450" />
