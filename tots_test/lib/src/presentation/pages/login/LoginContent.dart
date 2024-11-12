@@ -140,7 +140,7 @@ class Logincontent extends StatelessWidget {
           color: Colors.white,
           margin: EdgeInsets.only(right: 5, bottom: 10),
         ),
-        Text(
+        const Text(
           'Create an account',
           style: TextStyle(
             color: Colors.grey,

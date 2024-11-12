@@ -35,7 +35,6 @@ class EmailChanged extends LoginEvent{
   List<Object?> get props => [email];
 }
 
-//registrar segundo evento de cambio de password
 class PasswordChanged extends LoginEvent{
   final BlocFormItem password;
   const PasswordChanged({required this.password} );

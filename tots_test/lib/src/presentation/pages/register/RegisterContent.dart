@@ -82,55 +82,87 @@ class Registercontent extends StatelessWidget {
     );
   }
 
-  Widget _textFieldFirstName(){
+   Widget _textFieldFirstName() {
     return Container(
       margin: EdgeInsets.only(left: 25, right: 25),
       child: DefaultTextfield(
         label: 'First name',
         errorText: state.showErrors ? state.firstName.error : null,
-        onChanged: (text){
+        onChanged: (text) {
           bloc?.add(RegisterFirstNameChanged(firstName: BlocFormItem(value: text)));
-        }),
+        },
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'First name is required';
+          }
+          return null;
+        },
+      ),
     );
   }
 
 
-  Widget _textFieldEmail(){
+  Widget _textFieldEmail() {
     return Container(
       margin: EdgeInsets.only(left: 25, right: 25),
       child: DefaultTextfield(
         label: 'Email',
         errorText: state.showErrors ? state.email.error : null,
-        onChanged: (text){
+        onChanged: (text) {
           bloc?.add(RegisterEmailChanged(email: BlocFormItem(value: text)));
-        }),
+        },
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Email is required';
+          } else if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
+            return 'Enter a valid email';
+          }
+          return null;
+        },
+      ),
     );
   }
 
 
-  Widget _textFieldPassword(){
+  Widget _textFieldPassword() {
     return Container(
       margin: EdgeInsets.only(left: 25, right: 25),
       child: DefaultTextfield(
-        obscureText: false,
         label: 'Password',
         errorText: state.showErrors ? state.password.error : null,
-        onChanged: (text){
+        onChanged: (text) {
           bloc?.add(RegisterPasswordChanged(password: BlocFormItem(value: text)));
-        }),
+        },
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Password is required';
+          } else if (value.length < 6) {
+            return 'Password must be at least 6 characters';
+          }
+          return null;
+        },
+      ),
     );
   }
 
-  Widget _textFieldConfirmPassword(){
+  Widget _textFieldConfirmPassword() {
     return Container(
       margin: EdgeInsets.only(left: 25, right: 25),
       child: DefaultTextfield(
-        obscureText: false,
         label: 'Confirm password',
         errorText: state.showErrors ? state.confirmPassword.error : null,
-        onChanged: (text){
+        onChanged: (text) {
           bloc?.add(RegisterConfirmPasswordChanged(confirmPassword: BlocFormItem(value: text)));
-        }),
+        },
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Please confirm your password';
+          } else if (value != state.password.value) {
+            return 'Passwords do not match';
+          }
+          return null;
+        },
+      ),
     );
   }
 

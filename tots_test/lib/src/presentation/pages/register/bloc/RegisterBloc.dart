@@ -79,38 +79,36 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
 
 
   Future<void> _onFormSubmit(RegisterFormSubmit event, Emitter<RegisterState> emit) async {
-    // Primero, verifica si las contraseñas coinciden antes de hacer cualquier otra cosa
     if (state.password.value != state.confirmPassword.value) {
       Fluttertoast.showToast(
         msg: 'Passwords do not match',
         toastLength: Toast.LENGTH_LONG,
       );
-      return;  // Salir si las contraseñas no coinciden
+      return; 
     }
 
-    // Emitir el estado de carga
+
     emit(state.copyWith(
       response: Loading(),
       formKey: formKey,
     ));
 
     try {
-      // Realizar la solicitud de registro
+  
       Resource response = await authusecases.resgister.run(state.toUser());
 
-      // Emitir el estado con la respuesta de la API
+
       emit(state.copyWith(
         response: response,
         formKey: formKey,
       ));
 
-      // Dependiendo del tipo de respuesta, mostrar el mensaje correspondiente
+ 
       if (response is Success) {
         Fluttertoast.showToast(
           msg: 'Successful registration',
           toastLength: Toast.LENGTH_LONG,
         );
-        // Aquí puedes agregar el redireccionamiento a la página de login si es necesario
       } else if (response is Error) {
         Fluttertoast.showToast(
           msg: response.message ?? 'Error during registration',
@@ -119,7 +117,6 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       }
 
     } catch (e) {
-      // Manejo de excepciones
       Fluttertoast.showToast(
         msg: 'An unexpected error occurred',
         toastLength: Toast.LENGTH_LONG,

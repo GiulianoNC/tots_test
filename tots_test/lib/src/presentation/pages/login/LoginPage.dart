@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:tots_test/src/domain/models/AuthResponse.dart';
 import 'package:tots_test/src/domain/utils/Resource.dart';
 import 'package:tots_test/src/presentation/pages/login/LoginContent.dart';
 import 'package:tots_test/src/presentation/pages/login/bloc/LoginBloc.dart';
-import 'package:tots_test/src/presentation/pages/login/bloc/LoginEvent.dart';
 import 'package:tots_test/src/presentation/pages/login/bloc/LoginState.dart';
 import 'package:tots_test/src/presentation/widgets/Image_background.dart';
 

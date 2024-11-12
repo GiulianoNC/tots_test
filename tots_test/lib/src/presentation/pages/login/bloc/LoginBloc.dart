@@ -7,7 +7,6 @@ import 'package:tots_test/src/presentation/pages/login/bloc/LoginEvent.dart';
 import 'package:tots_test/src/presentation/pages/login/bloc/LoginState.dart';
 import 'package:tots_test/src/presentation/utils/BlocForItem.dart';
 
-//MANEJO DE LOS DATOS QUE SE EXTRAEN DE PANTALLA LOGIN
 class LoginBloc extends Bloc<LoginEvent,LoginState>{
 
   Authusecases authusecases;
@@ -91,7 +90,7 @@ class LoginBloc extends Bloc<LoginEvent,LoginState>{
   } catch (e) {
     emit(
       state.copyWith(
-        response: Error('Error inesperado: ${e.toString()}'), // Mensaje de error
+        response: Error('Error inesperado: ${e.toString()}'), 
         formKey: formKey,
       ),
     );
